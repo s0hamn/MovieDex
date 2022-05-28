@@ -1,6 +1,7 @@
 let menu = document.querySelector(".menu-icon")
 let navbar = document.querySelector(".menu")
-
+let loader1 = document.getElementById("loader1")
+let loader2 = document.getElementById("loader2")
 
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500"
 const trendingURL = "https://api.themoviedb.org/3/trending/all/day?api_key=53429b93896ec0365c0d076f33deebb1"
@@ -22,6 +23,7 @@ let pageCount = 1;
 
 nextPageBtn.addEventListener('click', () => {
   pageCount++;
+  loader1.style.display = "flex"
   fetchLatestMovies(pageCount)
   console.log(pageCount)
 })
@@ -72,7 +74,7 @@ async function fetchTrendingMovies() {
               </div>
           </div>`
   })
-
+  loader1.style.display = "none"
   trendingSlider.innerHTML = str;
 
 
@@ -114,7 +116,7 @@ async function fetchLatestMovies(pageCount) {
 </div>`
   })
 
-
+  loader1.style.display = "none"
   newContent.innerHTML = str;
 
 
@@ -139,7 +141,7 @@ var swiper = new Swiper(".trending-content", {
   },
   breakpoints: {
     640: {
-      slidesPerView: 2,
+      slidesPerView: 10,
       spaceBetween: 20,
     },
     768: {
