@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MovieDex</title>
+
+    <!-- fav icon  -->
+    <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
+
+    <!-- style.css  -->
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="swiper-bundle.min.css">
+</head>
+
+<body>
+    
+    <header>
+        <div class="nav container">
+            <!-- logo  -->
+            <a href="index.html" class="logo">Movie<span>Dex</span></a>
+
+            <div class="nav-icons">
+                <div class="menu-icon">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+
+
+            <!-- -------menu------- -->
+            <div class="menu">
+                <img src="img/img3.png" alt="">
+                <div class="navbar">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#trending">Trending</a></li>
+                    <li><a href="#new">Recent</a></li>
+                    <li><a href="#upcoming">Upcoming</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- home section start -->
+    <section class="home container" id="home">
+        <div class="blackbg"></div>
+        <img class="movieBackDrop" src="https://image.tmdb.org/t/p/w500/geYUecpFI2AonDLhjyK9zoVFcMv.jpg" alt="">
+        <img src="https://image.tmdb.org/t/p/w500/3pTwMUEavTzVOh6yLN0aEwR7uSy.jpg" alt="" class="movieCard">
+        
+        <div class="home-text">
+            <h1>Jujutsu Kaisen 0</h1>
+            <p>Yuta Okkotsu is a nervous high school student who is suffering from a serious problem—his childhood friend Rika has turned into a curse and won't leave him alone. Since Rika is no ordinary curse, his plight is noticed by Satoru Gojo, a teacher at Jujutsu High, a school where fledgling exorcists learn how to combat curses. Gojo convinces Yuta to enroll, but can he learn enough in time to confront the curse that haunts him?</p>
+            <a href="#" class="btn">Watch Now</a>
+        </div>
+    </section>
+
+
+    <!-- trending section  -->
+
+    <section class="trending container" id="trending">
+        <div class="heading">
+            <i class='bx bxs-flame'></i>
+            <h2>Trending Movies</h2>
+        </div>
+
+        <div class="swiper trending-content">
+            <div class="swiper-button-next swiper-btn" ></div>
+            <div class="swiper-button-prev swiper-btn"></div>
+            <div class="swiper-wrapper "  id="trending-slider">
+                <!-- slide 1 -->
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img src="anime_card_example.jpg" alt="">
+
+            
+                        <div class="box-text">
+                            <div class="blur-bg"></div>
+                            <h2>One Piece</h2>
+                            <h3>Adventure</h3>
+                            <div class="play-movie">
+                                <div class="rating">
+                                    <i class='bx bxs-star'></i>
+                                    <span>4.7</span>
+
+                                </div>
+                                <a href="#" class="box-btn"><i class='bx bx-play-circle'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+    </section>
+
+    <!-- New Section  -->
+
+    <section class="new container" id="new">
+        <div class="heading">
+            <i class='bx bxs-camera-movie'></i>
+            <h2>New Movies</h2>
+        </div>
+
+        <div id="new-content">
+
+            
+            
+        </div>
+
+        <div id="next-page">
+            <a id="next-page-button" href="#new-content">Next Page</a>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="swiper-bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
