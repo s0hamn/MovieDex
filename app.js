@@ -2,6 +2,7 @@ let menu = document.querySelector(".menu-icon")
 let navbar = document.querySelector(".menu")
 let loader1 = document.getElementById("loader1")
 let loader2 = document.getElementById("loader2")
+let homeSliderWrapper = document.getElementById("home-slider-wrapper")
 
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500"
 const trendingURL = "https://api.themoviedb.org/3/trending/all/day?api_key=53429b93896ec0365c0d076f33deebb1"
@@ -23,7 +24,11 @@ let pageCount = 1;
 
 nextPageBtn.addEventListener('click', () => {
   pageCount++;
+  newContent.innerHTML = `<div id="loader2">
+  <div class="loader-icon"></div>
+</div>`;
   loader1.style.display = "flex"
+
   fetchLatestMovies(pageCount)
   console.log(pageCount)
 })
@@ -40,6 +45,7 @@ class Movie {
 
 
 }
+
 
 async function fetchTrendingMovies() {
   let response = await fetch(trendingURL);
@@ -94,7 +100,7 @@ async function fetchLatestMovies(pageCount) {
     if (title == undefined) {
       title = currMovie.name;
     }
-    
+
     let type = "MOVIE"
 
     str += `<div class="box">
@@ -119,8 +125,41 @@ async function fetchLatestMovies(pageCount) {
   loader1.style.display = "none"
   newContent.innerHTML = str;
 
+}
+
+async function startHomeSlider() {
+
+  let latestURL = baseLatestURL + "1"
+  let response = await fetch(latestURL);
+  let data = await response.text();
+  let results = JSON.parse(data).results;
+  let str = ``
+  for (let i = 0; i < 5; i++) {
+    let result = results[i];
+    let backdrop = BASE_IMG_URL + result.backdrop_path
+    let title = result.title
+    let poster_path = BASE_IMG_URL + result.poster_path
+    let overview = result.overview
+
+    str += `<div class="swiper-slide home-box">
+    <div class="blackbg"></div>
+    <img class="movieBackDrop" src="${backdrop}"
+        alt="">
+    <img src="${poster_path}" alt="" class="movieCard">
+
+    <div class="home-text">
+        <h1>${title}</h1>
+        <p>${overview}</p>
+        <a href="#" class="btn">Watch Now</a>
+    </div>
+</div>`
+  }
+
+  homeSliderWrapper.innerHTML = str;
 
 }
+
+startHomeSlider();
 
 fetchTrendingMovies();
 fetchLatestMovies();
@@ -155,4 +194,20 @@ var swiper = new Swiper(".trending-content", {
   },
 });
 
+var swiper2 = new Swiper(".home-slider", {
+  spaceBetween: 30,
+  centeredSlides: true,
+  autoplay: {
+    delay: 10000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
 // swiperBtn.style.top = "25%"
