@@ -109,7 +109,7 @@ async function fetchLatestMovies(pageCount) {
       title = currMovie.name;
     }
 
-    let type = "MOVIE"
+    let type = "MOVIE" 
 
     str += `<div class="box">
     <img src="${imgUrl}" alt="">
@@ -187,12 +187,16 @@ var swiper = new Swiper(".trending-content", {
     disableOnInteraction: false
   },
   breakpoints: {
+    300:{
+      slidesPerView:2,
+      spaceBetween: 10,
+    },
     640: {
-      slidesPerView: 10,
+      slidesPerView: 5,
       spaceBetween: 20,
     },
     768: {
-      slidesPerView: 3,
+      slidesPerView: 4,
       spaceBetween: 40,
     },
     1068: {
