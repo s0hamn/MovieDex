@@ -41,7 +41,7 @@ body {
 .container {
     max-width: 1068px;
     margin: auto;
-    width: 100%;
+    width: 95%;;
 }
 
 /* Header */
@@ -423,10 +423,36 @@ header {
 }
 
 /* responsive */
+@media only screen and (max-width: 900px) {
+    .home-text p{
+        display: none;
+    }
 
-@media only screen and (max-width: 1100px) {
+    .home-text{
+        width: 60%;
+    }
+
+    .home-text p{
+        display: none;
+    }
+    .home-text p{
+        display: none;
+    }
+
+    .home-slider{
+        margin-top: 2rem;
+    }
+
+    .home-box .movieCard{
+        width: 40%;
+        padding: 20px 0 20px 20px;
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
     .container {
-        max-width: 760px;
+        /* max-width: 760px; */
         margin: auto;
         width: 95%;
     }
@@ -457,7 +483,6 @@ header {
     }
 
     .home-box .movieCard{
-        flex: 1;
         width: 40%;
         padding: 20px 0 20px 20px;
         margin-left: 0px;
