@@ -3,6 +3,7 @@ let navbar = document.querySelector(".menu")
 let loader1 = document.getElementById("loader1")
 let loader2 = document.getElementById("loader2")
 let homeSliderWrapper = document.getElementById("home-slider-wrapper")
+let navA = document.getElementsByClassName("nav-a")
 
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500"
 const trendingURL = "https://api.themoviedb.org/3/trending/all/day?api_key=53429b93896ec0365c0d076f33deebb1"
@@ -19,6 +20,13 @@ menu.onclick = () => {
   menu.classList.toggle('move')
   navbar.classList.toggle('active')
 }
+
+Array.from(navA).forEach(element => {
+  element.addEventListener('click', () => {
+    menu.classList.toggle('move')
+    navbar.classList.toggle('active')
+  })
+})
 
 let pageCount = 1;
 
