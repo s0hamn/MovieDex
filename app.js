@@ -1,59 +1,15 @@
 let menu = document.querySelector(".menu-icon")
 let navbar = document.querySelector(".menu")
 let loader1 = document.getElementById("loader1")
-let loader2 = document.getElementById("loader2")
 let homeSliderWrapper = document.getElementById("home-slider-wrapper")
 let navA = document.getElementsByClassName("nav-a")
+let genreItems = document.getElementsByClassName("genre-item")
 
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500"
+const BASE_GENRE_URL = "https://api.themoviedb.org/3/discover/movie?api_key=53429b93896ec0365c0d076f33deebb1&with_genres="
 const trendingURL = "https://api.themoviedb.org/3/trending/all/day?api_key=53429b93896ec0365c0d076f33deebb1"
 
 const baseLatestURL = 'https://api.themoviedb.org/3/movie/now_playing?api_key=53429b93896ec0365c0d076f33deebb1&language=en-US&page='
-
-
-
-let trendingSlider = document.getElementById("trending-slider")
-let newContent = document.getElementById("new-content")
-let nextPageBtn = document.getElementById("next-page-button")
-const trendingMoviesList = [];
-menu.onclick = () => {
-  menu.classList.toggle('move')
-  navbar.classList.toggle('active')
-}
-
-Array.from(navA).forEach(element => {
-  element.addEventListener('click', () => {
-    menu.classList.toggle('move')
-    navbar.classList.toggle('active')
-  })
-})
-
-let pageCount = 1;
-
-nextPageBtn.addEventListener('click', () => {
-  pageCount++;
-  newContent.innerHTML = `<div id="loader2">
-  <div class="loader-icon"></div>
-</div>`;
-  loader1.style.display = "flex"
-
-  fetchLatestMovies(pageCount)
-  console.log(pageCount)
-})
-
-
-class Movie {
-
-  constructor(title, rating, imgurl, type) {
-    this.title = title
-    this.rating = rating
-    this.imgurl = imgurl
-    this.type = type
-  }
-
-
-}
-
 
 async function fetchTrendingMovies() {
   let response = await fetch(trendingURL);
@@ -167,10 +123,130 @@ async function startHomeSlider() {
 
 }
 
+async function fetchGenreData(genre){
+  const genres = {
+    "Comedy":35,
+    "Action":28,
+    "Adventure":12,
+    "Animation":16,
+    "Crime":80,
+    "Fantasy":14,
+    "Horror":27,
+    "Romance":10749,
+    "Thriller":53
+  }
+
+  let genreID = genres[genre];
+  let genreURL = BASE_GENRE_URL + `${genreID}`
+  console.log(genreURL)
+  let response = await fetch(genreURL);
+  let data = await response.text();
+  let results = JSON.parse(data).results;
+
+  let str = ``;
+  Array.from(results).forEach(currMovie => {
+    let imgUrl = BASE_IMG_URL + currMovie.poster_path;
+    let rating = currMovie.vote_average;
+    let title = currMovie.title;
+
+    if (title == undefined) {
+      title = currMovie.name;
+    }
+
+    let type = "MOVIE" 
+
+    str += `<div class="box">
+    <img src="${imgUrl}" alt="">
+
+
+    <div class="box-text">
+        <h2>${title}</h2>
+        <h3>${type}</h3>
+        <div class="play-movie">
+            <div class="rating">
+                <i class='bx bxs-star'></i>
+                <span>${rating}</span>
+
+            </div>
+            <a href="#" class="box-btn"><i class='bx bx-play-circle'></i></a>
+        </div>
+    </div>
+</div>`
+  })
+
+  genreContent.innerHTML = str;
+  
+
+  
+}
+
+let trendingSlider = document.getElementById("trending-slider")
+let newContent = document.getElementById("new-content")
+let genreContent = document.getElementById("genre-content")
+let nextPageBtn = document.getElementById("next-page-button")
+const trendingMoviesList = [];
+menu.onclick = () => {
+  menu.classList.toggle('move')
+  navbar.classList.toggle('active')
+}
+
+Array.from(navA).forEach(element => {
+  element.addEventListener('click', () => {
+    menu.classList.toggle('move')
+    navbar.classList.toggle('active')
+  })
+})
+function resetHighlightGenre() {
+  Array.from(genreItems).forEach(element =>{
+    element.classList.remove("highlight-genre")
+  })
+}
+
+Array.from(genreItems).forEach(element =>{
+  element.addEventListener('click', ()=>{
+    resetHighlightGenre()
+    genreContent.innerHTML = `<div class="loader2">
+  <div class="loader-icon"></div>
+</div>`;
+
+    element.classList.toggle('highlight-genre')
+    
+    fetchGenreData(element.innerText);
+  })
+})
+
+let pageCount = 1;
+
+nextPageBtn.addEventListener('click', () => {
+  pageCount++;
+  newContent.innerHTML = `<div class="loader2">
+  <div class="loader-icon"></div>
+</div>`;
+
+  fetchLatestMovies(pageCount)
+  console.log(pageCount)
+})
+
+
+class Movie {
+
+  constructor(title, rating, imgurl, type) {
+    this.title = title
+    this.rating = rating
+    this.imgurl = imgurl
+    this.type = type
+  }
+
+
+}
+
+
+
 startHomeSlider();
 
 fetchTrendingMovies();
 fetchLatestMovies();
+fetchGenreData("Comedy")
 var swiper = new Swiper(".trending-content", {
   slidesPerView: 1,
   spaceBetween: 5,
