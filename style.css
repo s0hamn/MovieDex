@@ -103,6 +103,56 @@ header {
 
 }
 
+.search-bar{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-text{
+    width: 0px;
+    margin-right: -44px;    
+    border-radius: 22px;
+    border: 1px solid var(--light-color);
+    outline: none;
+    padding: 0 20px;
+    background: var(--light-color);
+    color: white;
+    transition: width 0.5s ease-in-out;
+}
+.search-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 5px;
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    background: var(--light-color);
+    cursor: pointer;
+    z-index: 200;
+    transition: 0.3s;
+}
+
+#search-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 190px);
+    gap: 1.1rem;
+}
+
+.search{
+    margin-top: 2rem;
+    display: none;
+}
+
+.search-btn .bx{
+    font-size: 1.5rem;
+}
+
+.search-active{
+    width: 100%;
+}
+
 .menu-icon div {
     display: block;
     background-color: var(--text-color);
